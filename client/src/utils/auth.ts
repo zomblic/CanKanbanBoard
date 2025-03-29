@@ -1,4 +1,4 @@
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode, JwtPayload } from 'jwt-decode';
 import type { UserData } from '../interfaces/UserData';
 
 
@@ -21,15 +21,17 @@ class AuthService {
   isTokenExpired(token: string) {  //work on this bit and then submit
     // TODO: return a value that indicates if the token is expired
     const tokenExpired = jwtDecode<JwtPayload>(token)
-    const currentTime = Date.now() / 1000;
+    const currentTime = Math.floor(Date.now() / 1000)
 
     if (!tokenExpired) {
-      return true;
-    }
+      return true 
+    } 
+
     if (!tokenExpired.exp) {
-      return true;
+      return true 
     }
-    return tokenExpired < currentTime;
+
+    return tokenExpired.exp < currentTime
   }
 
   getToken(): string {
