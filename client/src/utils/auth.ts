@@ -5,20 +5,31 @@ import type { UserData } from '../interfaces/UserData';
 class AuthService {
   getProfile() {
     // TODO: return the decoded token
-    return jwtDecode<UserData>(this.getToken());
+    const token = this.getToken();
+    if (!token) {
+      return jwtDecode<UserData>(this.getToken());
+    } else {
+      return null;
+    }
   }
-
   loggedIn() {
     // TODO: return a value that indicates if the user is logged in
     const token = this.getToken();
     return token;
   }
-  
-isTokenExpired(token: string) {  //work on this bit and then submit
+
+  isTokenExpired(token: string) {  //work on this bit and then submit
     // TODO: return a value that indicates if the token is expired
-    const decodedToken: any = jwtDecode(token);
+    const tokenExpired = jwtDecode<JwtPayload>(token)
     const currentTime = Date.now() / 1000;
-    return decodedToken.exp < currentTime;
+
+    if (!tokenExpired) {
+      return true;
+    }
+    if (!tokenExpired.exp) {
+      return true;
+    }
+    return tokenExpired < currentTime;
   }
 
   getToken(): string {
