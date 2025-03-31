@@ -1,4 +1,4 @@
-# <span style="color:rgb(255, 0, 76);">WEATHER ME NOW</span>
+# <span style="color:rgb(255, 0, 76);">CAN KANBAN BOARD</span>
 ![License: MIT](./utils/MITBADGE.svg)
 ##  <span style="color:rgb(0, 217, 255);">Table of Contents</span>
 - [Description](#description)
